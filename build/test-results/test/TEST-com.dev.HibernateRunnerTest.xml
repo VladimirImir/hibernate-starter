@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dev.HibernateRunnerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-08T11:53:49" hostname="DESKTOP-PJ8248D" time="0.196">
+  <properties/>
+  <testcase name="checkReflectionApi()" classname="com.dev.HibernateRunnerTest" time="0.196"/>
+  <system-out><![CDATA[insert
+into
+public.users
+(username, firstname, lastname, birth_date, age)
+values
+(?, ?, ?, ?, ?)
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
