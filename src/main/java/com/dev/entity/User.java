@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -27,5 +24,7 @@ public class User {
     @Column(name = "birth_date")
     private LocalDate birthDate;
     private Integer age;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
