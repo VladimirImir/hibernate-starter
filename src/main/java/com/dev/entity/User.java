@@ -1,5 +1,6 @@
 package com.dev.entity;
 
+import com.dev.converter.BirthdateConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,9 +22,11 @@ public class User {
     private String username;
     private String firstname;
     private String lastname;
+
+    //@Convert(converter = BirthdateConverter.class)
     @Column(name = "birth_date")
-    private LocalDate birthDate;
-    private Integer age;
+    private Birthdate birthDate;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

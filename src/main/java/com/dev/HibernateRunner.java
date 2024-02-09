@@ -1,5 +1,7 @@
 package com.dev;
 
+import com.dev.converter.BirthdateConverter;
+import com.dev.entity.Birthdate;
 import com.dev.entity.Role;
 import com.dev.entity.User;
 import org.hibernate.Session;
@@ -24,6 +26,7 @@ public class HibernateRunner {
         var configuration = new Configuration();
         //configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
         //configuration.addAnnotatedClass(User.class);
+        configuration.addAttributeConverter(new BirthdateConverter());
         configuration.configure();
 
         try (var sessionFactory = configuration.buildSessionFactory();
@@ -31,11 +34,10 @@ public class HibernateRunner {
             session.beginTransaction();
 
             var user = User.builder()
-                    .username("ivan@gmail.com")
+                    .username("ivan11@gmail.com")
                     .firstname("Ivan")
                     .lastname("Ivanov")
-                    .birthDate(LocalDate.of(2000, 1, 11))
-                    .age(20)
+                    .birthDate(new Birthdate(LocalDate.of(2000, 1, 11)))
                     .role(Role.ADMIN)
                     .build();
             session.save(user);
