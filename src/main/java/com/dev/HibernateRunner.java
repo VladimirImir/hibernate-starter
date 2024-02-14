@@ -48,6 +48,14 @@ public class HibernateRunner {
                     .build();
             session.save(user);*/
             var user = session.get(User.class, "ivan1@gmail.com");
+            user.setLastname("Petrov2");
+            session.flush();
+
+            System.out.println(session.isDirty());
+
+            /*session.evict(user1);
+            session.clear();
+            session.close();*/
 
             session.getTransaction().commit();
         }
