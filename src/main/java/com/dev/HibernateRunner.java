@@ -33,7 +33,7 @@ public class HibernateRunner {
              Session session = sessionFactory.openSession()) {
             session.beginTransaction();
 
-            User user = User.builder()
+            /*User user = User.builder()
                     .username("ivan1@gmail.com")
                     .firstname("Ivan")
                     .lastname("Ivanov")
@@ -46,21 +46,12 @@ public class HibernateRunner {
                     .birthDate(new Birthdate(LocalDate.of(2000, 1, 19)))
                     .role(Role.ADMIN)
                     .build();
-            session.save(user);
+            session.save(user);*/
+            var user = session.get(User.class, "ivan1@gmail.com");
 
             session.getTransaction().commit();
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
