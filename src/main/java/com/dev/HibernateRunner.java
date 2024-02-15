@@ -28,6 +28,7 @@ public class HibernateRunner {
                 .personalInfo(PersonalInfo.builder()
                         .lastname("Petrov")
                         .firstname("Petr")
+                        .birthDate(new Birthdate(LocalDate.of(2000, 1, 5)))
                         .build())
                 .build();
         log.info("User entity is in transient state, object: {}", user);
@@ -44,6 +45,16 @@ public class HibernateRunner {
                 session1.getTransaction().commit();
             }
             log.warn("User is in detached state: {}, session is closed {}", user, session1);
+            try (var session = sessionFactory.openSession()) {
+                var key = PersonalInfo.builder()
+                        .lastname("Petrov")
+                        .firstname("Petr")
+                        .birthDate(new Birthdate(LocalDate.of(2000, 1, 5)))
+                        .build();
+
+                var user2 = session.get(User.class, key);
+                System.out.println();
+            }
         } catch (Exception exception) {
             log.error("Exception occurred", exception);
             throw exception;
