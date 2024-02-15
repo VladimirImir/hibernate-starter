@@ -2,6 +2,7 @@ package com.dev;
 
 import com.dev.converter.BirthdateConverter;
 import com.dev.entity.Birthdate;
+import com.dev.entity.PersonalInfo;
 import com.dev.entity.Role;
 import com.dev.entity.User;
 import com.dev.util.HibernateUtil;
@@ -23,9 +24,11 @@ public class HibernateRunner {
     public static void main(String[] args) throws SQLException {
 
         var user = User.builder()
-                .username("ivan1@gmail.com")
-                .lastname("Ivanov")
-                .firstname("Ivan")
+                .username("petr@gmail.com")
+                .personalInfo(PersonalInfo.builder()
+                        .lastname("Petrov")
+                        .firstname("Petr")
+                        .build())
                 .build();
         log.info("User entity is in transient state, object: {}", user);
 

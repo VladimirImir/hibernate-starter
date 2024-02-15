@@ -8,12 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -26,12 +21,10 @@ public class User {
 
     @Id
     private String username;
-    private String firstname;
-    private String lastname;
 
-    //    @Convert(converter = BirthdayConverter.class)
-    @Column(name = "birth_date")
-    private Birthdate birthDate;
+    @Embedded
+    @AttributeOverride(name = "birthDate", column = @Column(name = "birth_date"))
+    private PersonalInfo personalInfo;
 
     @Type(type = "dev")
     private String info;
