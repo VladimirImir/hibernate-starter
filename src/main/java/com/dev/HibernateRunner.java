@@ -1,10 +1,7 @@
 package com.dev;
 
 import com.dev.converter.BirthdateConverter;
-import com.dev.entity.Birthdate;
-import com.dev.entity.PersonalInfo;
-import com.dev.entity.Role;
-import com.dev.entity.User;
+import com.dev.entity.*;
 import com.dev.util.HibernateUtil;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.extern.slf4j.Slf4j;
@@ -23,74 +20,29 @@ public class HibernateRunner {
 
     public static void main(String[] args) throws SQLException {
 
-        var user = User.builder()
-                .username("petr2@gmail.com")
+        Company company = Company.builder()
+                .name("Google")
+                .build();
+        User user = User.builder()
+                .username("petr@gmail.com")
                 .personalInfo(PersonalInfo.builder()
                         .lastname("Petrov")
                         .firstname("Petr")
-                        .birthDate(new Birthdate(LocalDate.of(2000, 1, 5)))
+                        .birthDate(new Birthdate(LocalDate.of(2000, 1, 2)))
                         .build())
+                .company(company)
                 .build();
-        log.info("User entity is in transient state, object: {}", user);
 
         try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory()) {
-            var session1 = sessionFactory.openSession();
+            Session session1 = sessionFactory.openSession();
             try (session1) {
-                var transaction = session1.beginTransaction();
-                log.trace("Transaction is created, {}", transaction);
+                Transaction transaction = session1.beginTransaction();
 
-                session1.saveOrUpdate(user);
-                log.trace("User is in persistent state: {}, session {}", user, session1);
+                session1.save(company);
+                session1.save(user);
 
                 session1.getTransaction().commit();
             }
-            log.warn("User is in detached state: {}, session is closed {}", user, session1);
-            try (var session = sessionFactory.openSession()) {
-                var key = PersonalInfo.builder()
-                        .lastname("Petrov")
-                        .firstname("Petr")
-                        .birthDate(new Birthdate(LocalDate.of(2000, 1, 5)))
-                        .build();
-
-                var user2 = session.get(User.class, key);
-                System.out.println();
-            }
-        } catch (Exception exception) {
-            log.error("Exception occurred", exception);
-            throw exception;
         }
-
-        /*try (SessionFactory sessionFactory = configuration.buildSessionFactory();
-             Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-
-            *//*User user = User.builder()
-                    .username("ivan1@gmail.com")
-                    .firstname("Ivan")
-                    .lastname("Ivanov")
-                    .info("""
-                            {
-                                "name": "Ivan",
-                                "id": 25
-                            }
-                            """)
-                    .birthDate(new Birthdate(LocalDate.of(2000, 1, 19)))
-                    .role(Role.ADMIN)
-                    .build();
-            session.save(user);*//*
-            var user = session.get(User.class, "ivan1@gmail.com");
-            user.setLastname("Petrov2");
-            session.flush();
-
-            System.out.println(session.isDirty());
-
-            *//*session.evict(user1);
-            session.clear();
-            session.close();*//*
-
-            session.getTransaction().commit();
-        }*/
     }
-
-
 }
