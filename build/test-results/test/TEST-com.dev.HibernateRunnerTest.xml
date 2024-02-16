@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dev.HibernateRunnerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-08T11:53:49" hostname="DESKTOP-PJ8248D" time="0.196">
+<testsuite name="com.dev.HibernateRunnerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-16T17:57:53" hostname="DESKTOP-PJ8248D" time="44.423">
   <properties/>
-  <testcase name="checkReflectionApi()" classname="com.dev.HibernateRunnerTest" time="0.196"/>
-  <system-out><![CDATA[insert
-into
-public.users
-(username, firstname, lastname, birth_date, age)
-values
-(?, ?, ?, ?, ?)
+  <testcase name="oneToMany()" classname="com.dev.HibernateRunnerTest" time="44.423"/>
+  <system-out><![CDATA[[19:57:54,952] INFO [org.hibernate.Version: 44] HHH000412: Hibernate ORM core version 5.5.6.Final
+[19:57:56,659] INFO [Hibernate Types: 283] This framework is proudly powered by:
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ _    _                           _     _
+| |  | |                         (_)   | |
+| |__| |_   _ _ __   ___ _ __ ___ _ ___| |_ ___ _ __   ___ ___
+|  __  | | | | '_ \ / _ \ '__/ __| / __| __/ _ \ '_ \ / __/ _ \
+| |  | | |_| | |_) |  __/ |  \__ \ \__ \ ||  __/ | | | (_|  __/
+|_|  |_|\__, | .__/ \___|_|  |___/_|___/\__\___|_| |_|\___\___|
+         __/ | |
+        |___/|_|
+
+At Hypersistence, we only build amazing tools, like Hibernate Types, Flexy Pool, or Hypersistence Optimizer.
+
+What if there were a tool that could automatically detect JPA and Hibernate performance issues?
+
+Hypersistence Optimizer is that tool! For more details, go to: 
+
+https://vladmihalcea.com/hypersistence-optimizer/
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+[19:57:59,920] INFO [org.hibernate.annotations.common.Version: 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[19:58:00,983] WARN [org.hibernate.orm.connections.pooling: 72] HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+[19:58:01,021] INFO [org.hibernate.orm.connections.pooling: 115] HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+[19:58:01,024] INFO [org.hibernate.orm.connections.pooling: 124] HHH10001001: Connection properties: {password=****, user=postgres}
+[19:58:01,028] INFO [org.hibernate.orm.connections.pooling: 129] HHH10001003: Autocommit mode: false
+[19:58:01,047] INFO [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl: 274] HHH000115: Hibernate connection pool size: 20 (min=1)
+[19:58:02,951] INFO [org.hibernate.dialect.Dialect: 175] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+[19:58:07,100] INFO [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator: 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    select
+        company0_.id as id1_1_0_,
+        company0_.name as name2_1_0_ 
+    from
+        company company0_ 
+    where
+        company0_.id=?
+Hibernate: 
+    select
+        users0_.company_id as company_8_0_0_,
+        users0_.id as id1_0_0_,
+        users0_.id as id1_0_1_,
+        users0_.company_id as company_8_0_1_,
+        users0_.info as info2_0_1_,
+        users0_.birth_date as birth_da3_0_1_,
+        users0_.firstname as firstnam4_0_1_,
+        users0_.lastname as lastname5_0_1_,
+        users0_.role as role6_0_1_,
+        users0_.username as username7_0_1_ 
+    from
+        public.users users0_ 
+    where
+        users0_.company_id=?
+
+[19:58:38,271] INFO [org.hibernate.orm.connections.pooling: 502] HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
