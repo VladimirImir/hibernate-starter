@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">44.423s</div>
+<div class="counter">14.595s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,8 +78,8 @@
 </tr>
 </thead>
 <tr>
-<td class="success">oneToMany()</td>
-<td class="success">44.423s</td>
+<td class="success">deleteCompany()</td>
+<td class="success">14.595s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,8 +87,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>[19:57:54,952] INFO [org.hibernate.Version: 44] HHH000412: Hibernate ORM core version 5.5.6.Final
-[19:57:56,659] INFO [Hibernate Types: 283] This framework is proudly powered by:
+<pre>[19:14:03,849] INFO [org.hibernate.Version: 44] HHH000412: Hibernate ORM core version 5.5.6.Final
+[19:14:05,629] INFO [Hibernate Types: 283] This framework is proudly powered by:
 
 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
  _    _                           _     _
@@ -109,22 +109,33 @@ Hypersistence Optimizer is that tool! For more details, go to:
 https://vladmihalcea.com/hypersistence-optimizer/
 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
 
-[19:57:59,920] INFO [org.hibernate.annotations.common.Version: 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-[19:58:00,983] WARN [org.hibernate.orm.connections.pooling: 72] HHH10001002: Using Hibernate built-in connection pool (not for production use!)
-[19:58:01,021] INFO [org.hibernate.orm.connections.pooling: 115] HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
-[19:58:01,024] INFO [org.hibernate.orm.connections.pooling: 124] HHH10001001: Connection properties: {password=****, user=postgres}
-[19:58:01,028] INFO [org.hibernate.orm.connections.pooling: 129] HHH10001003: Autocommit mode: false
-[19:58:01,047] INFO [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl: 274] HHH000115: Hibernate connection pool size: 20 (min=1)
-[19:58:02,951] INFO [org.hibernate.dialect.Dialect: 175] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
-[19:58:07,100] INFO [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator: 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[19:14:08,117] INFO [org.hibernate.annotations.common.Version: 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[19:14:08,651] WARN [org.hibernate.orm.connections.pooling: 72] HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+[19:14:08,835] INFO [org.hibernate.orm.connections.pooling: 115] HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/postgres]
+[19:14:08,898] INFO [org.hibernate.orm.connections.pooling: 124] HHH10001001: Connection properties: {password=****, user=postgres}
+[19:14:08,917] INFO [org.hibernate.orm.connections.pooling: 129] HHH10001003: Autocommit mode: false
+[19:14:08,929] INFO [org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl: 274] HHH000115: Hibernate connection pool size: 20 (min=1)
+[19:14:12,020] INFO [org.hibernate.dialect.Dialect: 175] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+[19:14:16,517] INFO [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator: 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
 Hibernate: 
     select
-        company0_.id as id1_1_0_,
-        company0_.name as name2_1_0_ 
+        user0_.id as id1_0_0_,
+        user0_.company_id as company_8_0_0_,
+        user0_.info as info2_0_0_,
+        user0_.birth_date as birth_da3_0_0_,
+        user0_.firstname as firstnam4_0_0_,
+        user0_.lastname as lastname5_0_0_,
+        user0_.role as role6_0_0_,
+        user0_.username as username7_0_0_,
+        company1_.id as id1_1_1_,
+        company1_.name as name2_1_1_ 
     from
-        company company0_ 
+        public.users user0_ 
+    left outer join
+        company company1_ 
+            on user0_.company_id=company1_.id 
     where
-        company0_.id=?
+        user0_.id=?
 Hibernate: 
     select
         users0_.company_id as company_8_0_0_,
@@ -141,8 +152,25 @@ Hibernate:
         public.users users0_ 
     where
         users0_.company_id=?
-
-[19:58:38,271] INFO [org.hibernate.orm.connections.pooling: 502] HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
+Hibernate: 
+    delete 
+    from
+        public.users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        public.users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        company 
+    where
+        id=?
+[19:14:17,661] INFO [org.hibernate.orm.connections.pooling: 502] HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/postgres]
 </pre>
 </span>
 </div>
@@ -154,7 +182,7 @@ Hibernate:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.1</a> at 16 февр. 2024 г., 19:58:38</p>
+<a href="http://www.gradle.org">Gradle 7.1</a> at 17 февр. 2024 г., 19:14:18</p>
 </div>
 </div>
 </body>
