@@ -66,6 +66,7 @@ class HibernateRunnerTest {
         session.beginTransaction();
 
         var company = session.get(Company.class, 1);
+        //Hibernate. 30. PersistentCollection
         System.out.println(company.getUsers());
 
         session.getTransaction().commit();
